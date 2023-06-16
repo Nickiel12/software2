@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.software2.AppointmentCard">
+   <children>
+      <SplitPane dividerPositions="0.2261904761904762" layoutX="-1.0" layoutY="5.0" orientation="VERTICAL" prefHeight="273.0" prefWidth="185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="31.0" prefWidth="148.0">
+               <children>
+                  <Label fx:id="idLabel" layoutX="14.0" layoutY="10.0" text="Id" />
+                  <Label fx:id="dateLabel" layoutX="101.0" layoutY="10.0" prefHeight="17.0" prefWidth="34.0" text="12/12" textAlignment="RIGHT" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0" prefWidth="148.0">
+               <children>
+                  <VBox layoutX="3.0" layoutY="14.0" prefHeight="123.0" prefWidth="142.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                     <children>
+                        <Label fx:id="detailsLabel" prefWidth="143.0" text="Label" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.software2.Rpt_ContactSchedule">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Contact Schedule Report" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="contactSelection" layoutX="14.0" layoutY="47.0" prefWidth="150.0" promptText="Select a Contact" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="47.0" />
+      <TableView fx:id="reportTable" layoutX="13.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="88.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="391.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.software2.AddAppointment">
+   <children>
+      <Label fx:id="idLabel" layoutX="29.0" layoutY="29.0" text="ID:" textAlignment="RIGHT" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="29.0" />
+      <Label fx:id="titleLabel" layoutX="23.0" layoutY="57.0" text="Title:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="60.0" />
+      <Label fx:id="descLabel" layoutX="37.0" layoutY="86.0" text="Description:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="270.0" />
+      <Label fx:id="locationLabel" layoutX="50.0" layoutY="127.0" text="Location:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="90.0" />
+      <Label fx:id="contactLabel" layoutX="61.0" layoutY="163.0" text="Contact:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="180.0" />
+      <Label fx:id="typeLabel" layoutX="54.0" layoutY="120.0" text="Type:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="120.0" />
+      <Label fx:id="custLabel" layoutX="54.0" layoutY="153.0" text="Customer:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="150.0" />
+      <Label fx:id="startTimeLabel" layoutX="54.0" layoutY="207.0" text="Start Time:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="210.0" />
+      <Label fx:id="endTimeLabel" layoutX="45.0" layoutY="242.0" text="End Time:" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="240.0" />
+      <TextField fx:id="idTextField" disable="true" editable="false" layoutX="111.0" layoutY="25.0" promptText="AUTO GENERATED" AnchorPane.rightAnchor="50.0" />
+      <TextField fx:id="titleTextField" layoutX="121.0" layoutY="56.0" promptText="Title" />
+      <TextField fx:id="locationTextField" layoutX="121.0" layoutY="86.0" promptText="Location" />
+      <TextField fx:id="typeTextField" layoutX="121.0" layoutY="116.0" promptText="Type" />
+      <TextArea fx:id="descTextArea" layoutX="121.0" layoutY="270.0" prefHeight="68.0" prefWidth="149.0" promptText="Appointment Description" />
+      <DatePicker fx:id="endTimeDatePicker" layoutX="183.0" layoutY="236.0" prefHeight="25.0" prefWidth="105.0" promptText="End Date" />
+      <DatePicker fx:id="startTimeDatePicker" layoutX="183.0" layoutY="206.0" prefHeight="25.0" prefWidth="105.0" promptText="Start Date" />
+      <ComboBox fx:id="contactComboBox" layoutX="121.0" layoutY="176.0" onAction="#validateContactCombBox" prefWidth="150.0" />
+      <ComboBox fx:id="custComboBox" layoutX="121.0" layoutY="146.0" onAction="#validateCustCombBox" prefWidth="150.0" />
+      <TextField fx:id="startTimeTimeTextField" layoutX="104.0" layoutY="206.0" onKeyPressed="#onStartTimeFocusChange" prefHeight="25.0" prefWidth="77.0" promptText="Start Time" />
+      <TextField fx:id="endTimeTimeTextField" layoutX="104.0" layoutY="236.0" onKeyReleased="#onEndTimeFocusChange" prefHeight="25.0" prefWidth="77.0" promptText="End Time" />
+      <Button fx:id="submitButton" layoutX="195.0" layoutY="352.0" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />
+      <Button fx:id="cancelButton" layoutX="253.0" layoutY="352.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+   </children>
+</AnchorPane>
