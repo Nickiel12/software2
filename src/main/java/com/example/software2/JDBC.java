@@ -65,7 +65,7 @@ public class JDBC {
 
         try {
             makeConnection();
-            makePreparedStatement("SELECT COUNT(User_ID) AS HasAccount FROM client_schedule.users WHERE User_Name=" + userName + " AND Password=" + password, getConnection());
+            makePreparedStatement("SELECT COUNT(User_ID) AS HasAccount FROM client_schedule.users WHERE User_Name='" + userName + "' AND Password=" + password, getConnection());
             rs = preparedStatement.executeQuery();
 
             while(rs.next()) {
@@ -93,6 +93,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT Appointment_ID, Title, Description, Location, Type, Start, End, " +
                     "Create_Date, Create_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID " +
                     "FROM client_schedule.appointments WHERE User_ID=" + userId, getConnection());
@@ -211,6 +212,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Create_Date," +
                     "Created_By, Last_Update, Last_Updated_By, Division_ID FROM client_schedule.customers", getConnection());
             rs = preparedStatement.executeQuery();
@@ -328,6 +330,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT Contact_ID, Contact_Name, Email FROM client_schedule.contacts", getConnection());
             rs = preparedStatement.executeQuery();
 
@@ -354,6 +357,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT Division_ID, Division, Country_ID FROM client_schedule.first_level_divisions", getConnection());
             rs = preparedStatement.executeQuery();
 
@@ -380,6 +384,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT Country_ID, Country FROM client_schedule.countries", getConnection());
             rs = preparedStatement.executeQuery();
 
@@ -404,6 +409,7 @@ public class JDBC {
 
         ResultSet rs = null;
         try {
+            makeConnection();
             makePreparedStatement("SELECT COUNT(Appointment_ID) AS AppointmentCount, DATE_FORMAT(Start, '%Y-%m') AS Month," +
                             "Type FROM client_schedule.appointments GROUP BY Month, Type WHERE Start > ? AND Start < ?", getConnection());
 
