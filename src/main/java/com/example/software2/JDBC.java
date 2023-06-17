@@ -22,6 +22,9 @@ public class JDBC {
     private static Connection connection = null;
     private static PreparedStatement preparedStatement;
 
+    /**
+     * Connect the class to the database
+     */
     public static void makeConnection() {
         try {
             connection = DriverManager.getConnection(jdbcUrl, userName, password);
@@ -31,8 +34,15 @@ public class JDBC {
         }
     }
 
+    /**
+     * Get the connection to the database
+     * @return the connection object, may be closed
+     */
     public static Connection getConnection() { return connection; }
 
+    /**
+     * Close the connection to the database. Called at the end of each database request to save resources
+     */
     public static void closeConnection() {
         try {
             connection.close();
@@ -42,15 +52,15 @@ public class JDBC {
         }
     }
 
+    /**
+     * Create a preparedstatement from a SQL string and connection object
+     * @param sqlStatement the sql statement to be run
+     * @param conn the connection object to call it on
+     * @throws SQLException throws an error if the sqlStatement is invalid
+     */
     public static void makePreparedStatement(String sqlStatement, Connection conn) throws SQLException {
         if (conn != null) preparedStatement = conn.prepareStatement(sqlStatement);
         else System.out.println("Prepared Statement Creation Failed!");
-    }
-
-    public static PreparedStatement getPreparedStatement() throws SQLException {
-        if (preparedStatement != null) return preparedStatement;
-        else System.out.println("Null reference to Prepared Statement");
-        return null;
     }
 
     /**
@@ -129,6 +139,11 @@ public class JDBC {
         return return_list;
     }
 
+    /**
+     * Create a new appointment in the database
+     * @param appointment the appointment object
+     * @param userName the creating user's name
+     */
     public void createAppointment(AppointmentInstance appointment, String userName) {
         try {
             makeConnection();
@@ -159,6 +174,11 @@ public class JDBC {
         System.out.println("database update appointment");
     }
 
+    /**
+     * Update/Edit an appointment in the database. Updates appointment rows with the same appointment_id as the passed
+     * appointment.
+     * @param appointment the pre-existent appointment object that has been changed
+     */
     public void editAppointment(AppointmentInstance appointment) {
         try {
             makeConnection();
@@ -189,7 +209,13 @@ public class JDBC {
         System.out.println("database update appointment");
     }
 
+    /**
+     * Delete an appointment row based on the appointment_id of the passed appoinmtment
+     * @param appointment the appointment object to delete
+     * @return the result of the
+     */
     public String deleteAppointment(AppointmentInstance appointment) {
+        String return_message = "";
         try {
             makeConnection();
             makePreparedStatement("DELETE FROM client_schedule.appointments WHERE Appointment_ID=?", getConnection());
@@ -197,15 +223,23 @@ public class JDBC {
             preparedStatement.setInt(1, appointment.getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected + " appointment deleted";
+            return_message = rowsAffected + " appointment deleted";
         } catch (SQLException e) {
             System.out.println("Sql Error: " + e.getMessage());
+            return_message = "There was an error deleting that appointment";
         } finally {
             closeConnection();
         }
-        return "Success";
+        return return_message;
     }
 
+    /**
+     * Check for conflicting appointments when scheduling appointments for a customer
+     * @param startTime the possible appointment's start time
+     * @param endTime the possible appointment's end time
+     * @param customerID the appointment customer's ID
+     * @return whether there is a conflicting appointment for this customer during the passed times
+     */
     public boolean appointmentConflictDuring(ZonedDateTime startTime, ZonedDateTime endTime, Integer customerID) {
 
         ResultSet rs = null;
@@ -237,6 +271,10 @@ public class JDBC {
         return false;
     }
 
+    /**
+     * Get all the customers in the database
+     * @return an observableList of all customers in the database
+     */
     public ObservableList<CustomerInstance> getCustomers() {
         ObservableList<CustomerInstance> return_list = FXCollections.observableArrayList();
 
@@ -272,6 +310,10 @@ public class JDBC {
         return return_list;
     }
 
+    /**
+     * Create a new customer record in the database
+     * @param customer the customer object to save to the database
+     */
     public void createCustomer(CustomerInstance customer) {
         try {
             makeConnection();
@@ -299,6 +341,10 @@ public class JDBC {
         System.out.println("database create new customer");
     }
 
+    /**
+     * Update a customer object in the database based on the customer_id in the passed object
+     * @param customer the pre-existing customer object with the changes applied
+     */
     public void editCustomer(CustomerInstance customer) {
         try {
             makeConnection();
@@ -324,6 +370,11 @@ public class JDBC {
         System.out.println("database update customer record");
     }
 
+    /**
+     * Try to delete a customer, running checks to ensure there are no linked appointments before running the deletion
+     * @param customer The customer object to try to delete
+     * @return whether the delete was successful, or canceled early
+     */
     public boolean tryDeleteCustomer(CustomerInstance customer) {
         System.out.println("database trying to delete customer");
 
@@ -355,6 +406,10 @@ public class JDBC {
         return true;
     }
 
+    /**
+     * Get all the contacts in the database
+     * @return an observableList of all of the contacts in the database
+     */
     public ObservableList<ContactInstance> getContacts() {
         ObservableList<ContactInstance> return_list = FXCollections.observableArrayList();
 
@@ -382,6 +437,10 @@ public class JDBC {
         return return_list;
     }
 
+    /**
+     * Get all the divisions in the database
+     * @return an observableList of all the divisions in the database
+     */
     public ObservableList<DivisionInstance> getDivisions() {
         ObservableList<DivisionInstance> return_list = FXCollections.observableArrayList();
 
@@ -409,6 +468,10 @@ public class JDBC {
         return return_list;
     }
 
+    /**
+     * Get all the countries in the database
+     * @return an observableList of all the countries in the database
+     */
     public ObservableList<CountryInstance> getCountries() {
         ObservableList<CountryInstance> return_list = FXCollections.observableArrayList();
 
@@ -434,6 +497,12 @@ public class JDBC {
         return return_list;
     }
 
+    /**
+     * Run the report query for the AppointmentTypesPerMonth report
+     * @param filterStart the start of the report filter
+     * @param filterEnd the end of the report filter
+     * @return an observableList of the custom datatype that represents a Type-Group and a count
+     */
     public ObservableList<Rpt_AppointmentTypePerMonthRow> Rpt_AppointmentsPerMonth(LocalDate filterStart, LocalDate filterEnd) {
         ObservableList<Rpt_AppointmentTypePerMonthRow> return_list = FXCollections.observableArrayList();
 
