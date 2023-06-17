@@ -20,7 +20,7 @@
          </font>
       </Text>
       <TextField id="field_password" fx:id="FieldPassword" layoutX="174.0" layoutY="70.0" promptText="Password" />
-      <Button id="button_submit" fx:id="LoginButton" layoutX="226.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+      <Button id="button_submit" fx:id="LoginButton" layoutX="277.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
       <Text id="LabelZone" fx:id="LabelZone" layoutX="56.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </AnchorPane>
