@@ -22,6 +22,5 @@ public class AppointmentApplication extends Application {
 
         Main main = fxmlLoader.getController();
         main.setStage(stage);
-        main.checkUpcoming();
     }
 }

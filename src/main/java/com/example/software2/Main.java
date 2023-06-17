@@ -121,15 +121,18 @@ public class Main {
                 break;
             }
         }
+        Alert alert;
         if (appointment != null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "You have an upcoming appointment!" +
+            alert = new Alert(Alert.AlertType.WARNING, "You have an upcoming appointment!" +
                     "\nId: " + appointment.getId() +
-                     "\nTime: " + appointment.getStartTimeLocal().format(DateTimeFormatter.ofPattern("hh:mm a")) + " -> " +
+                    "\nTime: " + appointment.getStartTimeLocal().format(DateTimeFormatter.ofPattern("hh:mm a")) + " -> " +
                     appointment.getEndTimeLocal().format(DateTimeFormatter.ofPattern("hh:mm a")) +
-                     "\nDate: " + appointment.getStartTimeLocal().format(DateTimeFormatter.ofPattern("MM/dd/yy"))
-            , ButtonType.OK);
-            alert.showAndWait();
+                    "\nDate: " + appointment.getStartTimeLocal().format(DateTimeFormatter.ofPattern("MM/dd/yy"))
+                    , ButtonType.OK);
+        } else {
+            alert = new Alert(Alert.AlertType.INFORMATION, "You have no appointments within the next 15 minutes", ButtonType.OK);
         }
+        alert.showAndWait();
     }
 
 
@@ -612,6 +615,8 @@ public class Main {
 
         if (!state.appIsLoggedIn()) {
             closeStageOnSet = true;
+        } else {
+            checkUpcoming();
         }
     }
 }
