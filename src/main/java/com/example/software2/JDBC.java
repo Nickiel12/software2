@@ -521,8 +521,6 @@ public class JDBC {
                 String month = rs.getString("Month");
                 String appointmentType = rs.getString("Type");
 
-                System.out.println(":" + appointmentType + ":");
-
                 return_list.add(new Rpt_AppointmentTypePerMonthRow(appointmentCount, month, appointmentType));
             }
         } catch (SQLException e) {
