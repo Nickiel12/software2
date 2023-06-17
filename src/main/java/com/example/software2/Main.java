@@ -371,7 +371,7 @@ public class Main {
             appointment = controller.getAppointment();
             appointment.setUserId(state.getUserId());
 
-            state.getDatabaseConnection().createAppointment(appointment);
+            state.getDatabaseConnection().createAppointment(appointment, state.getUsername());
             state.updateAppointments();
         }
     }
