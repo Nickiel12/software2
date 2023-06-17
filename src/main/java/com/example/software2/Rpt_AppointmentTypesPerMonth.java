@@ -44,6 +44,7 @@ public class Rpt_AppointmentTypesPerMonth {
     public void initialize() {
         filterStart.setValue(LocalDate.now().withDayOfMonth(1));
         filterStartMonth = LocalDate.now().withDayOfMonth(1);
+        filterEndMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
         filterStart.setOnAction(actionEvent -> {
             LocalDate date = filterStart.getValue();
