@@ -1,6 +1,7 @@
 package com.example.software2;
 
 import com.example.software2.models.Rpt_AppointmentTypePerMonthRow;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -71,7 +72,7 @@ public class Rpt_AppointmentTypesPerMonth {
         rptMonth.setPrefWidth(100);
 
         TableColumn<Rpt_AppointmentTypePerMonthRow, String> rptType = new TableColumn<>("Type");
-        rptType.setCellValueFactory(new PropertyValueFactory<>("appointmentTypeDescription"));
+        rptType.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().appointmentType()));
         rptType.setPrefWidth(100);
 
         reportTable.getColumns().addAll(rptCount, rptMonth, rptType);
