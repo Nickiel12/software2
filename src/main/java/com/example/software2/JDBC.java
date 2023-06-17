@@ -24,10 +24,9 @@ public class JDBC {
 
     public static void makeConnection() {
         try {
-            Class.forName(driver); // find the driver
             connection = DriverManager.getConnection(jdbcUrl, userName, password);
-            System.out.println("Connection Successful");
-        } catch (ClassNotFoundException | SQLException e) {
+            //System.out.println("Connection Successful");
+        } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
@@ -37,7 +36,7 @@ public class JDBC {
     public static void closeConnection() {
         try {
             connection.close();
-            System.out.println("Connection Closed");
+            //System.out.println("Connection Closed");
         } catch (SQLException e ) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -65,7 +64,7 @@ public class JDBC {
 
         try {
             makeConnection();
-            makePreparedStatement("SELECT COUNT(User_ID) AS HasAccount FROM client_schedule.users WHERE User_Name='" + userName + "' AND Password=" + password, getConnection());
+            makePreparedStatement("SELECT COUNT(User_ID) AS HasAccount FROM client_schedule.users WHERE User_Name='" + userName + "' AND Password='" + password + "'", getConnection());
             rs = preparedStatement.executeQuery();
 
             while(rs.next()) {
@@ -95,7 +94,7 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("SELECT Appointment_ID, Title, Description, Location, Type, Start, End, " +
-                    "Create_Date, Create_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID " +
+                    "Create_Date, Created_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID " +
                     "FROM client_schedule.appointments WHERE User_ID=" + userId, getConnection());
             rs = preparedStatement.executeQuery();
 
@@ -134,7 +133,7 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("INSERT INTO client_schedule.appointments (Title, Description, Location, Type, Start, End, " +
-                    "Create_Date, Create_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID) VALUES (" +
+                    "Create_Date, Created_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID) VALUES (" +
                     "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)", getConnection());
 
             preparedStatement.setString(1, appointment.getTitle());
