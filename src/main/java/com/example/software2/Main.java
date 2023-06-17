@@ -87,7 +87,7 @@ public class Main {
                     try {
                         card = cardLoader.load();
                         AppointmentCard cardController = cardLoader.getController();
-                        cardController.setAppointment(state.getAppointments().get(i), state.getCurrentZone());
+                        cardController.setAppointment(state.getAppointments().get(i), state);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
