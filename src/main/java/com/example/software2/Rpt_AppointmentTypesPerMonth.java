@@ -71,7 +71,7 @@ public class Rpt_AppointmentTypesPerMonth {
         rptMonth.setPrefWidth(100);
 
         TableColumn<Rpt_AppointmentTypePerMonthRow, String> rptType = new TableColumn<>("Type");
-        rptType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        rptType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
         rptType.setPrefWidth(100);
 
         reportTable.getColumns().addAll(rptCount, rptMonth, rptType);
