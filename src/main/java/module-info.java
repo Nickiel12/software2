@@ -6,6 +6,7 @@ module com.example.software2 {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires mysql.connector.j;
 
     opens com.example.software2 to javafx.fxml;
     exports com.example.software2;
