@@ -67,8 +67,6 @@ public class AddAppointment {
     @FXML
     private TextField endTimeTimeTextField;
     @FXML
-    private DatePicker endTimeDatePicker;
-    @FXML
     private Label descLabel;
     @FXML
     private TextArea descTextArea;
@@ -95,7 +93,6 @@ public class AddAppointment {
         startTimeDatePicker.setValue(appointment.getStartTimeLocal().toLocalDate());
 
         endTimeTimeTextField.setText(hourFormat.format(appointment.getEndTimeLocal()));
-        endTimeDatePicker.setValue(appointment.getEndTimeLocal().toLocalDate());
 
         CustomerInstance customer = null;
         for (CustomerInstance item : state.getCustomers()) {
@@ -238,6 +235,11 @@ public class AddAppointment {
         currentZone = zone;
     }
 
+    private JDBC databaseConn;
+    public void setDatabaseConnection(JDBC newConn) {
+        databaseConn = newConn;
+    }
+
     /**
      * Handle the Submit button on the addAppointment form.
      * Does last minute input validation and prepared the value for getAppointment
@@ -284,6 +286,12 @@ public class AddAppointment {
         LocalTime startTime = LocalTime.parse(startTimeTimeTextField.getText(), hourFormat);
         LocalTime endTime = LocalTime.parse(endTimeTimeTextField.getText(), hourFormat);
 
+        if (!startTime.isBefore(endTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You cannot end the appointment before it starts\nPlease fix the issue and try again", ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
         ZonedDateTime startDateTime = null;
         ZonedDateTime endDateTime = null;
         boolean didError = false;
@@ -299,14 +307,37 @@ public class AddAppointment {
         }
 
         try {
-            endDateTime = ZonedDateTime.of(endTimeDatePicker.getValue().atStartOfDay(), currentZone)
+            endDateTime = ZonedDateTime.of(startTimeDatePicker.getValue().atStartOfDay(), currentZone)
                     .withHour(endTime.getHour())
                     .withMinute(endTime.getMinute())
                     .withSecond(endTime.getSecond())
                     .withZoneSameInstant(ZoneOffset.UTC);
         } catch (DateTimeParseException | NullPointerException e) {
-            endTimeDatePicker.setStyle("-fx-border-color: #FF0000");
+            startTimeDatePicker.setStyle("-fx-border-color: #FF0000");
             didError = true;
+        }
+
+        if (startDateTime != null && endDateTime != null) {
+
+            if (databaseConn.appointmentConflictDuring(startDateTime, endDateTime, appointment.getCustomerId())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "This customer already has an appointment at that time!", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+
+            ZonedDateTime businessHoursStart = startTimeDatePicker.getValue().atStartOfDay(ZoneId.of("America/New_York")).withHour(8).withMinute(0).withSecond(0);
+            ZonedDateTime businessHoursEnd = startTimeDatePicker.getValue().atStartOfDay(ZoneId.of("America/New_York")).withHour(22).withMinute(0).withSecond(0);
+            if (startDateTime.isBefore(businessHoursStart) || startDateTime.isAfter(businessHoursEnd)
+                || endDateTime.isBefore(businessHoursStart) || endDateTime.isAfter(businessHoursEnd) ) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING, "The entered hours are outside of business hours\n" +
+                        "Are you sure you want to create this appointment?", ButtonType.YES, ButtonType.CANCEL);
+                alert.showAndWait();
+
+                if (alert.getResult() != ButtonType.YES) {
+                    return;
+                }
+            }
         }
 
         if (didError) {

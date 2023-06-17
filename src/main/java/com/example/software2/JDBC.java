@@ -206,6 +206,37 @@ public class JDBC {
         return "Success";
     }
 
+    public boolean appointmentConflictDuring(ZonedDateTime startTime, ZonedDateTime endTime, Integer customerID) {
+
+        ResultSet rs = null;
+        try {
+            makeConnection();
+            makePreparedStatement("SELECT COUNT(Appointment_ID) AS ConflictCount FROM client_schedule.appointments" +
+                    " WHERE Customer_ID=? AND ((Start BETWEEN ? AND ?) OR (End BETWEEN ? AND ?))", getConnection());
+
+            preparedStatement.setInt(1, customerID);
+            preparedStatement.setTimestamp(2, Timestamp.from(startTime.toInstant()));
+            preparedStatement.setTimestamp(4, Timestamp.from(startTime.toInstant()));
+            preparedStatement.setTimestamp(3, Timestamp.from(endTime.toInstant()));
+            preparedStatement.setTimestamp(5, Timestamp.from(endTime.toInstant()));
+
+            rs = preparedStatement.executeQuery();
+
+            while(rs.next()) {
+                int count = rs.getInt("ConflictCount");
+                if (count > 0) {
+                    return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Sql Error: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return false;
+    }
+
     public ObservableList<CustomerInstance> getCustomers() {
         ObservableList<CustomerInstance> return_list = FXCollections.observableArrayList();
 
