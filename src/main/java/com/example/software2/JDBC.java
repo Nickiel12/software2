@@ -222,7 +222,7 @@ public class JDBC {
                 String address = rs.getString("Address");
                 String postalCode = rs.getString("Postal_Code");
                 String phone = rs.getString("Phone");
-                Timestamp createTime = rs.getTimestamp("Created_By");
+                Timestamp createTime = rs.getTimestamp("Create_Date");
                 String createBy = rs.getString("Created_By");
                 Timestamp lastUpDate = rs.getTimestamp("Last_Update");
                 String lastUpdateBy = rs.getString("Last_Updated_By");
