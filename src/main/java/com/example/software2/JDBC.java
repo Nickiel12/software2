@@ -410,7 +410,7 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("SELECT COUNT(Appointment_ID) AS AppointmentCount, DATE_FORMAT(Start, '%Y-%m') AS Month," +
-                            "Type FROM client_schedule.appointments GROUP BY Month, Type WHERE Start BETWEEN ? AND ?", getConnection());
+                            "Type FROM client_schedule.appointments WHERE Start BETWEEN ? AND ? GROUP BY Month, Type", getConnection());
 
             preparedStatement.setTimestamp(1, Timestamp.from(filterStart.atStartOfDay().toInstant(ZoneOffset.UTC)));
             preparedStatement.setTimestamp(2, Timestamp.from(filterEnd.atStartOfDay().toInstant(ZoneOffset.UTC)));

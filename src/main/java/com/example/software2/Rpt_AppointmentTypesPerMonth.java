@@ -30,6 +30,7 @@ public class Rpt_AppointmentTypesPerMonth {
      */
     public void setApplicationState(AppState appState) {
         state = appState;
+        updateReport();
     }
 
     @FXML
@@ -43,7 +44,7 @@ public class Rpt_AppointmentTypesPerMonth {
 
     public void initialize() {
         filterStartMonth = LocalDate.now().withDayOfMonth(1);
-        filterStart.setValue(filterEndMonth);
+        filterStart.setValue(filterStartMonth);
         filterEndMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
         filterEnd.setValue(filterEndMonth);
 
@@ -74,8 +75,6 @@ public class Rpt_AppointmentTypesPerMonth {
         rptType.setPrefWidth(100);
 
         reportTable.getColumns().addAll(rptCount, rptMonth, rptType);
-
-        updateReport();
     }
 
     private void updateReport() {
