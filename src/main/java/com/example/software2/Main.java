@@ -162,6 +162,8 @@ public class Main {
     private FilteredList<AppointmentInstance> calendarAppointments;
     /**
      * Create the calendar table found on the calendar tab
+     * LAMBDA USAGE: Line 173 - a lambda is used here to call the event handler easily and inline. This reduces the amount
+     * of boilerplate needed, making it easier to understand.
      */
     public void initializeCalendar() {
         calendarAppointments = new FilteredList<>(state.getAppointments());

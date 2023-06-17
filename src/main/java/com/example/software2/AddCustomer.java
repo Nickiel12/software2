@@ -221,6 +221,9 @@ public class AddCustomer {
     /**
      * An internal function that updates the predicate used to filter the
      * divisions combo box when a country is selected
+     * LAMBDA USAGE: line 229 - uses a lambda to cut down on the number of lines required to do a simple comparison.
+     * Without this lambda usage, at least 10 more lines would be added to this file for a private boolean function and
+     * associated JavaDoc comments, which would make the code harder to understand when quickly reading the function content
      */
     private void filterDivisions() {
         CountryInstance country = countryComboBox.getSelectionModel().getSelectedItem();
