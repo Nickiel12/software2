@@ -9,6 +9,10 @@ import javafx.scene.control.TableView;
 
 import java.time.LocalDate;
 
+/**
+ * Controller for the Appointment Types Per Month report window
+ * @author Nicholas Young
+ */
 public class Rpt_AppointmentTypesPerMonth {
     private AppState state;
 
@@ -30,6 +34,9 @@ public class Rpt_AppointmentTypesPerMonth {
     @FXML
     private TableView<Rpt_AppointmentTypePerMonthRow> reportTable;
 
+    /**
+     * Initialize all of the table columns, defaults, and event hooks for the Appointment Types Per Month report window
+     */
     public void initialize() {
         filterStartMonth = LocalDate.now().withDayOfMonth(1);
         filterStart.setValue(filterStartMonth);

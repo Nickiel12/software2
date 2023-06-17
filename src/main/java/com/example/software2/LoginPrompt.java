@@ -47,6 +47,9 @@ public class LoginPrompt {
 
     private AppState state;
 
+    /**
+     * Update all of the labels with localized values
+     */
     public void localize() {
         ResourceBundle bundle = ResourceBundle.getBundle("LoginPrompt", state.getCurrentLocale());
 

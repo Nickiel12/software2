@@ -31,6 +31,7 @@ public class CustomerInstance {
     /**
      * Update the customer's name
      * @param customerName the new customer name
+     * @param editingUserName the editing user's name
      */
     public void setCustomerName(String customerName, String editingUserName) {
         lastUpdatedBy = editingUserName;
@@ -51,6 +52,7 @@ public class CustomerInstance {
     /**
      * Update the customer's full address
      * @param address the customer's new address
+     * @param editingUserName the editing user's name
      */
     public void setAddress(String address, String editingUserName) {
         lastUpdate = ZonedDateTime.now(ZoneOffset.UTC);
@@ -71,6 +73,7 @@ public class CustomerInstance {
     /**
      * Update the customer's postal code
      * @param postalCode the customer's new postal code
+     * @param editingUserName the editing user's name
      */
     public void setPostalCode(String postalCode, String editingUserName) {
         lastUpdate = ZonedDateTime.now(ZoneOffset.UTC);
@@ -91,6 +94,7 @@ public class CustomerInstance {
     /**
      * Update the customer's phone number
      * @param phoneNumber the customer's new phone number
+     * @param editingUserName the editing user's name
      */
     public void setPhoneNumber(String phoneNumber, String editingUserName) {
         lastUpdate = ZonedDateTime.now(ZoneOffset.UTC);
@@ -162,6 +166,7 @@ public class CustomerInstance {
     /**
      * Update the customer's division id. Assumed to be a valid primary key in first-level divisions
      * @param divisionId the new customer division id
+     * @param editingUserName the editing user's name
      */
     public void setDivisionId(Integer divisionId, String editingUserName) {
         lastUpdate = ZonedDateTime.now(ZoneOffset.UTC);

@@ -541,6 +541,10 @@ public class Main {
     @FXML
     private Button Rpt_CustByDiv;
 
+    /**
+     * Handler for the open Appointment Type Per Month button
+     * @throws IOException throws an IOException if the Rpt_AppointmentTypesPerMonth.fxml file is not in the correct location
+     */
     public void onRptAppoinmentTypePerMnth() throws IOException  {
         state.updateCustomers();
         state.updateCountries();
@@ -559,6 +563,10 @@ public class Main {
         stage.showAndWait();
     }
 
+    /**
+     * Handler for the open Contact Schedule report button
+     * @throws IOException throws an IOException if the Rpt_ContactSchedule.fxml file is not in the correct location
+     */
     public void onRptContactSchedule() throws IOException  {
         state.updateCustomers();
         state.updateCountries();
@@ -577,6 +585,10 @@ public class Main {
         stage.showAndWait();
     }
 
+    /**
+     * Handler for the open Rpt_CustomerByDivision report button
+     * @throws IOException throws an IOException if the Rpt_CustomerByDivision.fxml file is not in the correct location
+     */
     public void onRptCustomerByDivision() throws IOException  {
         state.updateCustomers();
         state.updateCountries();

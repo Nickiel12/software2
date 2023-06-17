@@ -130,6 +130,7 @@ public class AppointmentInstance {
 
     /**
      * Get the startTime in the configured application timezone
+     * @return the appointment's start time in the local zone
      */
     public ZonedDateTime getStartTimeLocal() {
         return this.startTime.withZoneSameInstant(this.localTime);
@@ -155,6 +156,7 @@ public class AppointmentInstance {
 
     /**
      * Get the endTime in the configured application timezone
+     * @return the appointment end time in the local timezone
      */
     public ZonedDateTime getEndTimeLocal() {
         return this.endTime.withZoneSameInstant(this.localTime);

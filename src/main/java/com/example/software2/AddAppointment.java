@@ -78,6 +78,7 @@ public class AddAppointment {
     /**
      * Change the addAppointment into an edit appointment pane by assigning an appointment to edit
      * @param appointment the AppointmentInstance the user wants to edit
+     * @param state the application state
      */
     public void setAppointment(AppointmentInstance appointment, AppState state) {
         currentZone = state.getCurrentZone();
@@ -235,6 +236,11 @@ public class AddAppointment {
     }
 
     private JDBC databaseConn;
+
+    /**
+     * Set the database connection so the form can check for conflicting appointment
+     * @param newConn the database connection
+     */
     public void setDatabaseConnection(JDBC newConn) {
         databaseConn = newConn;
     }

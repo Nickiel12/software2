@@ -13,6 +13,10 @@ import javafx.util.StringConverter;
 
 import java.util.Objects;
 
+/**
+ * Controller for the Customers By Division report window
+ * @author Nicholas
+ */
 public class Rpt_CustomerByDivision {
 
     private AppState state;
@@ -44,6 +48,9 @@ public class Rpt_CustomerByDivision {
     @FXML
     private ComboBox<CountryInstance> countryComboBox;
 
+    /**
+     * Initialize all of the table columns and hooks for the Customers By Division form
+     */
     public void initialize() {
 
         TableColumn<CustomerInstance, Integer> cst_idColumn = new TableColumn<>("Id");
