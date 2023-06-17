@@ -340,7 +340,6 @@ public class AddAppointment {
             startTimeTimeTextField.setStyle("-fx-border-color: darkgrey");
             return true;
         } catch (DateTimeParseException e) {
-            System.out.println("ding");
             startTimeTimeTextField.setStyle("-fx-border-color: #FF0000");
             return false;
         }

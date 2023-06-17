@@ -94,7 +94,7 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("SELECT Appointment_ID, Title, Description, Location, Type, Start, End, " +
-                    "Create_Date, Created_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID " +
+                    "Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID " +
                     "FROM client_schedule.appointments WHERE User_ID=" + userId, getConnection());
             rs = preparedStatement.executeQuery();
 
@@ -164,7 +164,7 @@ public class JDBC {
             makeConnection();
             makePreparedStatement("UPDATE client_schedule.appointments SET Title=?, Description=?, Location=?," +
                     " Type=?, Start=?, End=?, " +
-                    "Last_Update=?, Last_Update_By=?, Customer_ID=?, Contact_ID=? WHERE id=?", getConnection());
+                    "Last_Update=?, Last_Update_By=?, Customer_ID=?, Contact_ID=? WHERE Appointment_ID=?", getConnection());
 
             preparedStatement.setInt(11, appointment.getId());
 
@@ -192,7 +192,7 @@ public class JDBC {
     public String deleteAppointment(AppointmentInstance appointment) {
         try {
             makeConnection();
-            makePreparedStatement("DELETE FROM client_schedule WHERE id=?", getConnection());
+            makePreparedStatement("DELETE FROM client_schedule.appointments WHERE Appointment_ID=?", getConnection());
 
             preparedStatement.setInt(1, appointment.getId());
 
@@ -272,7 +272,7 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("UPDATE client_schedule.customers SET Customer_Name=?, Address=?, Postal_Code=?," +
-                    " Phone=?, Last_Update=?, Last_Updated_By=?, Division_ID=? WHERE id=?", getConnection());
+                    " Phone=?, Last_Update=?, Last_Updated_By=?, Division_ID=? WHERE Customer_ID=?", getConnection());
 
             preparedStatement.setInt(8, customer.getId());
 
@@ -312,7 +312,7 @@ public class JDBC {
                 }
             }
 
-            makePreparedStatement("DELETE FROM client_schedule.customers WHERE id=" + customer.getId(), getConnection());
+            makePreparedStatement("DELETE FROM client_schedule.customers WHERE Customer_ID=?" + customer.getId(), getConnection());
 
             int rowsAffected = preparedStatement.executeUpdate();
         } catch (SQLException e) {
