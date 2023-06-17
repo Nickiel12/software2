@@ -65,6 +65,10 @@ public class Main {
         state.setCurrentLocale(Locale.getDefault());
         handleLogin();
 
+        state.updateContacts();
+        state.updateCustomers();
+        state.updateCountries();
+        state.updateDivisions();
 
         D_UserLoggedIn.setText("Welcome: " + state.getUsername());
         D_CurTimezone.setText("Current Timezone: " + state.getCurrentZone());
@@ -101,10 +105,6 @@ public class Main {
         initializeCustomersView();
 
         state.updateAppointments();
-        state.updateContacts();
-        state.updateCustomers();
-        state.updateCountries();
-        state.updateDivisions();
     }
 
     /**
