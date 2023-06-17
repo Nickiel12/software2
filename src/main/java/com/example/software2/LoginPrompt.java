@@ -6,7 +6,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -72,7 +71,7 @@ public class LoginPrompt {
     }
 
     /**
-     * Handles the press of the Log in button and validates the entered credentials
+     * Handles the press of the Login button and validates the entered credentials
      */
     public void handleLogin() {
         ResourceBundle bundle = ResourceBundle.getBundle("LoginPrompt", state.getCurrentLocale());
@@ -92,7 +91,7 @@ public class LoginPrompt {
                                 ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")),
                         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
-                System.out.println("There was an error saving login_activity.txt\n" + e.toString());
+                System.out.println("There was an error saving login_activity.txt\n" + e);
             }
         } else {
             // successful login
@@ -102,17 +101,9 @@ public class LoginPrompt {
                         ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")),
                         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
-                System.out.println("There was an error saving login_activity.txt\n" + e.toString());
+                System.out.println("There was an error saving login_activity.txt\n" + e);
             }
         }
-        closeModal();
-    }
-
-    /**
-     * Handle the press of the Cancel button by closing the modal
-     * without setting a LogInUser
-     */
-    public void handleCancel() {
         closeModal();
     }
 

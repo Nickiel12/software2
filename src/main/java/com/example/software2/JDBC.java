@@ -16,9 +16,8 @@ public class JDBC {
     private static final String location = "//localhost/";
     private static final String databaseName = "client_schedule";
     private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // local
-    private static final String driver = "com.mysql.jdbc.Driver";
     private static final String userName = "sqlUser";
-    private static String password = "Passw0rd!";
+    private static final String password = "Passw0rd!";
     private static Connection connection = null;
     private static PreparedStatement preparedStatement;
 
@@ -53,7 +52,7 @@ public class JDBC {
     }
 
     /**
-     * Create a preparedstatement from a SQL string and connection object
+     * Create a prepared statement from a SQL string and connection object
      * @param sqlStatement the sql statement to be run
      * @param conn the connection object to call it on
      * @throws SQLException throws an error if the sqlStatement is invalid
@@ -67,10 +66,10 @@ public class JDBC {
      * Validate the user credentials, and get the user's id
      * @param userName the entered username
      * @param password the entered user password
-     * @return Either -1, for no user found with that combination, or the user's Id
+     * @return Either -1, for no user found with that combination, or the user's ID
      */
     public Integer validateUser(String userName, String password) {
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
             makeConnection();
@@ -100,7 +99,7 @@ public class JDBC {
     public ObservableList<AppointmentInstance> getUserAppointments (Integer userId) {
         ObservableList<AppointmentInstance> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT Appointment_ID, Title, Description, Location, Type, Start, End, " +
@@ -210,12 +209,12 @@ public class JDBC {
     }
 
     /**
-     * Delete an appointment row based on the appointment_id of the passed appoinmtment
+     * Delete an appointment row based on the appointment_id of the passed appointment
      * @param appointment the appointment object to delete
      * @return the result of the
      */
     public String deleteAppointment(AppointmentInstance appointment) {
-        String return_message = "";
+        String return_message;
         try {
             makeConnection();
             makePreparedStatement("DELETE FROM client_schedule.appointments WHERE Appointment_ID=?", getConnection());
@@ -242,7 +241,7 @@ public class JDBC {
      */
     public boolean appointmentConflictDuring(ZonedDateTime startTime, ZonedDateTime endTime, Integer customerID) {
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT COUNT(Appointment_ID) AS ConflictCount FROM client_schedule.appointments" +
@@ -278,7 +277,7 @@ public class JDBC {
     public ObservableList<CustomerInstance> getCustomers() {
         ObservableList<CustomerInstance> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Create_Date," +
@@ -332,7 +331,7 @@ public class JDBC {
             preparedStatement.setString(8, customer.getLastUpdatedBy());
             preparedStatement.setInt(9, customer.getDivisionId());
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            int _rowsAffected = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Sql Error: " + e.getMessage());
         } finally {
@@ -361,7 +360,7 @@ public class JDBC {
             preparedStatement.setString(6, customer.getLastUpdatedBy());
             preparedStatement.setInt(7, customer.getDivisionId());
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            int _rowsAffected = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Sql Error: " + e.getMessage());
         } finally {
@@ -381,7 +380,7 @@ public class JDBC {
         try {
             makeConnection();
 
-            ResultSet rs = null;
+            ResultSet rs;
             makePreparedStatement("SELECT COUNT(Appointment_ID) AS AppointmentCount FROM client_schedule.appointments WHERE Customer_ID=" + customer.getId(), getConnection());
 
             rs = preparedStatement.executeQuery();
@@ -396,7 +395,7 @@ public class JDBC {
 
             makePreparedStatement("DELETE FROM client_schedule.customers WHERE Customer_ID=?" + customer.getId(), getConnection());
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            int _rowsAffected = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Sql Error: " + e.getMessage());
         } finally {
@@ -408,12 +407,12 @@ public class JDBC {
 
     /**
      * Get all the contacts in the database
-     * @return an observableList of all of the contacts in the database
+     * @return an observableList of all the contacts in the database
      */
     public ObservableList<ContactInstance> getContacts() {
         ObservableList<ContactInstance> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT Contact_ID, Contact_Name, Email FROM client_schedule.contacts", getConnection());
@@ -444,7 +443,7 @@ public class JDBC {
     public ObservableList<DivisionInstance> getDivisions() {
         ObservableList<DivisionInstance> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT Division_ID, Division, Country_ID FROM client_schedule.first_level_divisions", getConnection());
@@ -475,7 +474,7 @@ public class JDBC {
     public ObservableList<CountryInstance> getCountries() {
         ObservableList<CountryInstance> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT Country_ID, Country FROM client_schedule.countries", getConnection());
@@ -506,7 +505,7 @@ public class JDBC {
     public ObservableList<Rpt_AppointmentTypePerMonthRow> Rpt_AppointmentsPerMonth(LocalDate filterStart, LocalDate filterEnd) {
         ObservableList<Rpt_AppointmentTypePerMonthRow> return_list = FXCollections.observableArrayList();
 
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             makeConnection();
             makePreparedStatement("SELECT COUNT(Appointment_ID) AS AppointmentCount, DATE_FORMAT(Start, '%Y-%m') AS Month," +

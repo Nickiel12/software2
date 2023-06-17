@@ -77,7 +77,7 @@ public class Main {
         D_AppointmentsPane.setFitToWidth(true);
         D_AppointmentsPane.setFitToHeight(false);
         D_AppointmentsPane.setPrefViewportHeight(200);
-        state.getAppointments().addListener(new ListChangeListener<AppointmentInstance>() {
+        state.getAppointments().addListener(new ListChangeListener<>() {
             @Override
             public void onChanged(Change<? extends AppointmentInstance> change) {
                 // this method will cause lag as it rebuild the whole list
@@ -87,7 +87,7 @@ public class Main {
                 for (int i = 0; i < state.getAppointments().size(); i++) {
 
                     FXMLLoader cardLoader = new FXMLLoader(getClass().getResource("AppointmentCard.fxml"));
-                    Parent card = null;
+                    Parent card;
                     try {
                         card = cardLoader.load();
                         AppointmentCard cardController = cardLoader.getController();
@@ -145,7 +145,7 @@ public class Main {
     @FXML
     private Label C_NavLabel;
     @FXML
-    private TableView C_Table;
+    private TableView<AppointmentInstance> C_Table;
     private LocalDate C_FilterStart;
     private LocalDate C_FilterEnd;
 
@@ -198,18 +198,14 @@ public class Main {
         });
         appContactColumn.setPrefWidth(80);
         TableColumn<AppointmentInstance, String> appStartTime = new TableColumn<>("Start Time");
-        appStartTime.setCellValueFactory(data -> {
-            return new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
-                    data.getValue().getStartTime().withZoneSameInstant(state.getCurrentZone())
-            ));
-        });
+        appStartTime.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
+                data.getValue().getStartTime().withZoneSameInstant(state.getCurrentZone())
+        )));
         appStartTime.setPrefWidth(125);
         TableColumn<AppointmentInstance, String> appEndTime = new TableColumn<>("End Time");
-        appEndTime.setCellValueFactory(data -> {
-            return new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
-                    data.getValue().getEndTime().withZoneSameInstant(state.getCurrentZone())
-            ));
-        });
+        appEndTime.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
+                data.getValue().getEndTime().withZoneSameInstant(state.getCurrentZone())
+        )));
         appStartTime.setPrefWidth(125);
         TableColumn<AppointmentInstance, Integer> appUserId = new TableColumn<>("User ID");
         appUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -297,7 +293,7 @@ public class Main {
      * Confirms the user wishes to delete that appointment, and displays any errors
      */
     public void onRemoveAppointmentPress() {
-        AppointmentInstance appointment = (AppointmentInstance) C_Table.getSelectionModel().getSelectedItem();
+        AppointmentInstance appointment = C_Table.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?"
                 + "\nId: " + appointment.getId() + "\nType: " + appointment.getType(), ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
@@ -326,11 +322,12 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        AppointmentInstance appointment = (AppointmentInstance) C_Table.getSelectionModel().getSelectedItem();
+        AppointmentInstance appointment = C_Table.getSelectionModel().getSelectedItem();
         AddAppointment controller = fxmlLoader.getController();
         controller.setCustomers(state.getCustomers());
         controller.setContacts(state.getContacts());
         controller.setZone(state.getCurrentZone());
+        controller.setDatabaseConnection(state.getDatabaseConnection());
         controller.setAppointment(appointment, state);
         controller.setStage(stage);
         controller.initialize();
@@ -357,16 +354,17 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        AppointmentInstance appointment = (AppointmentInstance) C_Table.getSelectionModel().getSelectedItem();
         AddAppointment controller = fxmlLoader.getController();
         controller.setCustomers(state.getCustomers());
         controller.setContacts(state.getContacts());
         controller.setZone(state.getCurrentZone());
+        controller.setDatabaseConnection(state.getDatabaseConnection());
         controller.setStage(stage);
         controller.initialize();
 
         stage.showAndWait();
 
+        AppointmentInstance appointment;
         if (!controller.wasCanceled()) {
             appointment = controller.getAppointment();
             appointment.setUserId(state.getUserId());
@@ -378,7 +376,7 @@ public class Main {
 
 
     @FXML
-    public TableView Cst_TableView;
+    public TableView<CustomerInstance> Cst_TableView;
     @FXML
     public Button Cst_EditButton;
     @FXML
@@ -463,7 +461,7 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        CustomerInstance customer = (CustomerInstance) Cst_TableView.getSelectionModel().getSelectedItem();
+        CustomerInstance customer = Cst_TableView.getSelectionModel().getSelectedItem();
         AddCustomer controller = fxmlLoader.getController();
         controller.setStage(stage);
         controller.setEditingUser(state.getUsername());
@@ -515,7 +513,7 @@ public class Main {
                 ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
 
-        CustomerInstance customer = (CustomerInstance) Cst_TableView.getSelectionModel().getSelectedItem();
+        CustomerInstance customer = Cst_TableView.getSelectionModel().getSelectedItem();
 
         if (alert.getResult() == ButtonType.YES) {
             boolean did_delete = state.getDatabaseConnection().tryDeleteCustomer(customer);
@@ -550,8 +548,7 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        Rpt_AppointmentTypesPerMonth controller = (Rpt_AppointmentTypesPerMonth) fxmlLoader.getController();
-        controller.setStage(stage);
+        Rpt_AppointmentTypesPerMonth controller = fxmlLoader.getController();
         controller.setApplicationState(state);
 
         stage.showAndWait();
@@ -569,8 +566,7 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        Rpt_ContactSchedule controller = (Rpt_ContactSchedule) fxmlLoader.getController();
-        controller.setStage(stage);
+        Rpt_ContactSchedule controller = fxmlLoader.getController();
         controller.setApplicationState(state);
 
         stage.showAndWait();
@@ -588,8 +584,7 @@ public class Main {
         stage.initOwner(primaryStage);
         stage.setScene(new Scene(root));
 
-        Rpt_CustomerByDivision controller = (Rpt_CustomerByDivision) fxmlLoader.getController();
-        controller.setStage(stage);
+        Rpt_CustomerByDivision controller = fxmlLoader.getController();
         controller.setApplicationState(state);
 
         stage.showAndWait();

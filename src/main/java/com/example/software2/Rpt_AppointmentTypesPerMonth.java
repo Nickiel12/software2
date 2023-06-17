@@ -6,23 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
 public class Rpt_AppointmentTypesPerMonth {
-
-    private Stage currentStage;
-
-    /**
-     * Set the Stage of the object so it can close it by itself
-     * @param newStage the stage this controller is displaying to
-     */
-    public void setStage(Stage newStage) {
-        currentStage = newStage;
-    }
-
     private AppState state;
 
     /**
@@ -41,7 +28,7 @@ public class Rpt_AppointmentTypesPerMonth {
     private DatePicker filterEnd;
     private LocalDate filterEndMonth;
     @FXML
-    private TableView reportTable;
+    private TableView<Rpt_AppointmentTypePerMonthRow> reportTable;
 
     public void initialize() {
         filterStartMonth = LocalDate.now().withDayOfMonth(1);

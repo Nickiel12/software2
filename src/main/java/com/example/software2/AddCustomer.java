@@ -88,7 +88,7 @@ public class AddCustomer {
                     null, -1);
         }
 
-        divisionComboBox.setCellFactory(new Callback<ListView<DivisionInstance>, ListCell<DivisionInstance>>() {
+        divisionComboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<DivisionInstance> call(ListView<DivisionInstance> divisionInstanceListView) {
                 return new ListCell<>() {
@@ -105,7 +105,7 @@ public class AddCustomer {
             }
         });
 
-        divisionComboBox.setConverter(new StringConverter<DivisionInstance>() {
+        divisionComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(DivisionInstance divisionInstance) {
                 if (divisionInstance != null) {
@@ -120,7 +120,7 @@ public class AddCustomer {
                 return null;
             }
         });
-        countryComboBox.setCellFactory(new Callback<ListView<CountryInstance>, ListCell<CountryInstance>>() {
+        countryComboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<CountryInstance> call(ListView<CountryInstance> countryInstanceListView) {
                 return new ListCell<>() {
@@ -136,7 +136,7 @@ public class AddCustomer {
                 };
             }
         });
-        countryComboBox.setConverter(new StringConverter<CountryInstance>() {
+        countryComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(CountryInstance countryInstance) {
                 if (countryInstance != null) {
@@ -152,9 +152,7 @@ public class AddCustomer {
             }
         });
 
-        countryComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            filterDivisions();
-        });
+        countryComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> filterDivisions());
     }
 
     /**
@@ -184,7 +182,7 @@ public class AddCustomer {
                     break;
                 }
             }
-            // This has to go after assinging country because of the predicate
+            // This has to go after assigning country because of the predicate
             divisionComboBox.getSelectionModel().select(division);
         }
 
@@ -205,7 +203,7 @@ public class AddCustomer {
 
     /**
      * Set the DivisionInstances that the form will display
-     * @param divisions a list of DivisionInstances used in the combobox
+     * @param divisions a list of DivisionInstances used in the combo box
      */
     public void setDivisions(ObservableList<DivisionInstance> divisions) {
         this.divisions = new FilteredList<>(divisions);
@@ -214,7 +212,7 @@ public class AddCustomer {
 
     /**
      * Set the CountryInstances that the form will display
-     * @param countries a list of CountryInstances used in the combobox
+     * @param countries a list of CountryInstances used in the combo box
      */
     public void setCountries(ObservableList<CountryInstance> countries) {
         countryComboBox.setItems(countries);
@@ -222,7 +220,7 @@ public class AddCustomer {
 
     /**
      * An internal function that updates the predicate used to filter the
-     * divisions combobox when a country is selected
+     * divisions combo box when a country is selected
      */
     private void filterDivisions() {
         CountryInstance country = countryComboBox.getSelectionModel().getSelectedItem();
@@ -312,7 +310,7 @@ public class AddCustomer {
 
     /**
      * The handler for the Cancel button.
-     * It sets the wasCancled variable, and closes the stage.
+     * It sets the wasCanceled variable, and closes the stage.
      */
     public void onCancelButton() {
         wasCanceled = true;

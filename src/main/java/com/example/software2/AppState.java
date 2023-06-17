@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 public class AppState {
 
-    private JDBC databaseConnection;
+    private final JDBC databaseConnection;
 
     /**
      * Get the current database connection
@@ -23,14 +23,6 @@ public class AppState {
      */
     public JDBC getDatabaseConnection() {
         return databaseConnection;
-    }
-
-    /**
-     * Set a new database connection
-     * @param databaseConnection the new database connection
-     */
-    public void setDatabaseConnection(JDBC databaseConnection) {
-        this.databaseConnection = databaseConnection;
     }
 
     private boolean userHasLoggedIn;
@@ -100,13 +92,13 @@ public class AppState {
 
     /**
      * Get the application's currently configured locale
-     * @return the appliction's currently configured locale
+     * @return the application's currently configured locale
      */
     public Locale getCurrentLocale() {
         return currentLocale;
     }
 
-    private ObservableList<AppointmentInstance> appointments;
+    private final ObservableList<AppointmentInstance> appointments;
 
     /**
      * Get the current list of cached appointments
@@ -129,7 +121,7 @@ public class AppState {
         }
     }
 
-    private ObservableList<ContactInstance> contacts;
+    private final ObservableList<ContactInstance> contacts;
 
     /**
      * Get the cached contacts
@@ -147,7 +139,7 @@ public class AppState {
         this.contacts.addAll( this.databaseConnection.getContacts());
     }
 
-    private ObservableList<CustomerInstance> customers;
+    private final ObservableList<CustomerInstance> customers;
 
     /**
      * Get the ObservableList of customers that is cached
@@ -165,17 +157,17 @@ public class AppState {
         this.customers.addAll(this.databaseConnection.getCustomers());
     }
 
-    private DateTimeFormatter dateFormat;
+    private final DateTimeFormatter dateFormat;
 
     /**
-     * Get the format used for full timedate values
+     * Get the format used for full time/date values
      * @return the datetime format used for full date-times
      */
     public DateTimeFormatter getDateFormat() {
         return this.dateFormat;
     }
 
-    private ObservableList<DivisionInstance> divisions;
+    private final ObservableList<DivisionInstance> divisions;
 
     /**
      * Get the currently cached Divisions as an ObservableList

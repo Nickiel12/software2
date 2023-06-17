@@ -2,13 +2,11 @@ package com.example.software2;
 
 import com.example.software2.models.AppointmentInstance;
 import com.example.software2.models.ContactInstance;
-import com.example.software2.models.DivisionInstance;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -20,16 +18,6 @@ import java.util.Objects;
  * @author Nicholas Young
  */
 public class Rpt_ContactSchedule {
-
-    private Stage currentStage;
-
-    /**
-     * Set the Stage of the object so it can close it by itself
-     * @param newStage the stage this controller is displaying to
-     */
-    public void setStage(Stage newStage) {
-        currentStage = newStage;
-    }
 
     private AppState state;
 
@@ -69,7 +57,7 @@ public class Rpt_ContactSchedule {
      */
     public void initialize() {
 
-        contactSelection.setCellFactory(new Callback<ListView<ContactInstance>, ListCell<ContactInstance>>() {
+        contactSelection.setCellFactory(new Callback<>() {
             @Override
             public ListCell<ContactInstance> call(ListView listView) {
                 return new ListCell<>() {
@@ -85,7 +73,7 @@ public class Rpt_ContactSchedule {
                 };
             }
         });
-        contactSelection.setConverter(new StringConverter<ContactInstance>() {
+        contactSelection.setConverter(new StringConverter<>() {
             @Override
             public String toString(ContactInstance contactInstance) {
                 if (contactInstance != null) {
@@ -101,9 +89,7 @@ public class Rpt_ContactSchedule {
             }
         });
 
-        contactSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            populateReport();
-        });
+        contactSelection.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> populateReport());
 
         TableColumn<AppointmentInstance, Integer> appIdColumn = new TableColumn<>("Id");
         appIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -121,18 +107,14 @@ public class Rpt_ContactSchedule {
         appCustomerColumn.setPrefWidth(30);
 
         TableColumn<AppointmentInstance, String> appStartTime = new TableColumn<>("Start Time");
-        appStartTime.setCellValueFactory(data -> {
-            return new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
-                    data.getValue().getStartTime().withZoneSameInstant(state.getCurrentZone())
-            ));
-        });
+        appStartTime.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
+                data.getValue().getStartTime().withZoneSameInstant(state.getCurrentZone())
+        )));
         appStartTime.setPrefWidth(125);
         TableColumn<AppointmentInstance, String> appEndTime = new TableColumn<>("End Time");
-        appEndTime.setCellValueFactory(data -> {
-            return new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
-                    data.getValue().getEndTime().withZoneSameInstant(state.getCurrentZone())
-            ));
-        });
+        appEndTime.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(state.getDateFormat().format(
+                data.getValue().getEndTime().withZoneSameInstant(state.getCurrentZone())
+        )));
         appStartTime.setPrefWidth(125);
 
         reportTable.getColumns().addAll(appIdColumn, appTitleColumn, appTypeColumn, appDescColumn, appStartTime, appEndTime, appCustomerColumn);

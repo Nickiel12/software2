@@ -75,7 +75,7 @@ public class AppointmentInstance {
     private Integer contactId;
 
     /**
-     * Set a new contact Id. This ID is assumed to be a valid
+     * Set a new contact ID. This ID is assumed to be a valid
      * foreign key to the Contacts table.
      * @param newContactId the new contact entry's ID
      */
@@ -84,7 +84,7 @@ public class AppointmentInstance {
     }
 
     /**
-     * Get the contact Id. It is assumed that this is a valid foreign
+     * Get the contact ID. It is assumed that this is a valid foreign
      * key for Contacts
      * @return the associated contact id
      */
@@ -180,7 +180,7 @@ public class AppointmentInstance {
     private Integer userId;
 
     /**
-     * Get the appointment's user Id, aka the appointment's 'owner'
+     * Get the appointment's user ID, aka the appointment's 'owner'
      * @return the scheduled user's id
      */
     public Integer getUserId() {
@@ -215,8 +215,8 @@ public class AppointmentInstance {
      * @param type the appointment type
      * @param startTime the appointment's start date and time in UTC
      * @param endTime the appointment's end date and time in UTC
-     * @param customerId the associated customer's unique Id
-     * @param userId the appointment's associated user's unique Id
+     * @param customerId the associated customer's unique ID
+     * @param userId the appointment's associated user's unique ID
      */
     public AppointmentInstance(Integer id, String title, String description, String location, Integer contactId,
                                String type, ZonedDateTime startTime, ZonedDateTime endTime, Integer customerId,

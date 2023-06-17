@@ -4,29 +4,16 @@ import com.example.software2.models.CountryInstance;
 import com.example.software2.models.CustomerInstance;
 import com.example.software2.models.DivisionInstance;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class Rpt_CustomerByDivision {
-
-    private Stage currentStage;
-
-    /**
-     * Set the Stage of the object so it can close it by itself
-     * @param newStage the stage this controller is displaying to
-     */
-    public void setStage(Stage newStage) {
-        currentStage = newStage;
-    }
 
     private AppState state;
 
@@ -37,7 +24,7 @@ public class Rpt_CustomerByDivision {
     public void setApplicationState(AppState appState) {
         state = appState;
 
-        reportItems = new FilteredList<CustomerInstance>(state.getCustomers());
+        reportItems = new FilteredList<>(state.getCustomers());
         // Default to an empty table
         reportItems.setPredicate(item -> false);
         reportTable.setItems(reportItems);
@@ -111,7 +98,7 @@ public class Rpt_CustomerByDivision {
 
         reportTable.getColumns().addAll(cst_division, cst_idColumn, cst_nameColumn, cst_phoneColumn, cst_country, cst_address);
 
-        divisionCombobox.setCellFactory(new Callback<ListView<DivisionInstance>, ListCell<DivisionInstance>>() {
+        divisionCombobox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<DivisionInstance> call(ListView<DivisionInstance> divisionInstanceListView) {
                 return new ListCell<>() {
@@ -128,7 +115,7 @@ public class Rpt_CustomerByDivision {
             }
         });
 
-        divisionCombobox.setConverter(new StringConverter<DivisionInstance>() {
+        divisionCombobox.setConverter(new StringConverter<>() {
             @Override
             public String toString(DivisionInstance divisionInstance) {
                 if (divisionInstance != null) {
@@ -143,7 +130,7 @@ public class Rpt_CustomerByDivision {
                 return null;
             }
         });
-        countryComboBox.setCellFactory(new Callback<ListView<CountryInstance>, ListCell<CountryInstance>>() {
+        countryComboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<CountryInstance> call(ListView<CountryInstance> countryInstanceListView) {
                 return new ListCell<>() {
@@ -159,7 +146,7 @@ public class Rpt_CustomerByDivision {
                 };
             }
         });
-        countryComboBox.setConverter(new StringConverter<CountryInstance>() {
+        countryComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(CountryInstance countryInstance) {
                 if (countryInstance != null) {

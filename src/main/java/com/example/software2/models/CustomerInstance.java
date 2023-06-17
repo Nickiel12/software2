@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
  * @author Nicholas Young
  */
 public class CustomerInstance {
-    private Integer id;
+    private final Integer id;
 
     /**
      * Get the customer's unique id
@@ -98,7 +98,7 @@ public class CustomerInstance {
         this.phoneNumber = phoneNumber;
     }
 
-    private ZonedDateTime createDate;
+    private final ZonedDateTime createDate;
 
     /**
      * Get the customer record's create date, Read only
@@ -120,7 +120,7 @@ public class CustomerInstance {
 
     /**
      * Set the user that created the customer. Only works if the customer does
-     * not alredy have a created user
+     * not already have a created user
      * @param userName the new username
      */
     public void setCreatedBy(String userName) {

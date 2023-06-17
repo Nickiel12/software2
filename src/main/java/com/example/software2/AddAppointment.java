@@ -74,7 +74,7 @@ public class AddAppointment {
     private Button submitButton;
     @FXML
     private Button cancelButton;
-    private boolean isEditing = false;
+
     /**
      * Change the addAppointment into an edit appointment pane by assigning an appointment to edit
      * @param appointment the AppointmentInstance the user wants to edit
@@ -117,7 +117,6 @@ public class AddAppointment {
         }
 
         this.appointment = appointment;
-        isEditing = true;
     }
 
     /**
@@ -150,7 +149,7 @@ public class AddAppointment {
             startTimeTimeTextField.setText(LocalTime.now().format(hourFormat));
             endTimeTimeTextField.setText(LocalTime.now().format(hourFormat));
         }
-        custComboBox.setCellFactory(new Callback<ListView<CustomerInstance>, ListCell<CustomerInstance>>() {
+        custComboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<CustomerInstance> call(ListView<CustomerInstance> customerInstanceListView) {
                 return new ListCell<>() {
@@ -166,7 +165,7 @@ public class AddAppointment {
                 };
             }
         });
-        custComboBox.setConverter(new StringConverter<CustomerInstance>() {
+        custComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(CustomerInstance customerInstance) {
                 if (customerInstance != null) {
@@ -182,7 +181,7 @@ public class AddAppointment {
             }
         });
 
-        contactComboBox.setCellFactory(new Callback<ListView<ContactInstance>, ListCell<ContactInstance>>() {
+        contactComboBox.setCellFactory(new Callback<>() {
             @Override
             public ListCell<ContactInstance> call(ListView<ContactInstance> contactInstanceListView) {
                 return new ListCell<>() {
@@ -198,7 +197,7 @@ public class AddAppointment {
                 };
             }
         });
-        contactComboBox.setConverter(new StringConverter<ContactInstance>() {
+        contactComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(ContactInstance contactInstance) {
                 if (contactInstance != null) {
