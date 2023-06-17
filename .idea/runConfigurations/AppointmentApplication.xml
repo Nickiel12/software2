@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="AppointementApplication" type="Application" factoryName="Application">
+  <configuration default="false" name="AppointmentApplication" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.example.software2.AppointmentApplication" />
     <module name="Software2" />
     <method v="2">
