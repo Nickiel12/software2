@@ -64,11 +64,11 @@ public class Rpt_AppointmentTypesPerMonth {
         });
 
         TableColumn<Rpt_AppointmentTypePerMonthRow, Integer> rptCount = new TableColumn<>("Count");
-        rptCount.setCellValueFactory(new PropertyValueFactory<>("count"));
+        rptCount.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().count()));
         rptCount.setPrefWidth(50);
 
         TableColumn<Rpt_AppointmentTypePerMonthRow, String> rptMonth = new TableColumn<>("Month");
-        rptMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
+        rptMonth.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().month()));
         rptMonth.setPrefWidth(100);
 
         TableColumn<Rpt_AppointmentTypePerMonthRow, String> rptType = new TableColumn<>("Type");
