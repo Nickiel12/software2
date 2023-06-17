@@ -42,9 +42,10 @@ public class Rpt_AppointmentTypesPerMonth {
     private TableView reportTable;
 
     public void initialize() {
-        filterStart.setValue(LocalDate.now().withDayOfMonth(1));
         filterStartMonth = LocalDate.now().withDayOfMonth(1);
+        filterStart.setValue(filterEndMonth);
         filterEndMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+        filterEnd.setValue(filterEndMonth);
 
         filterStart.setOnAction(actionEvent -> {
             LocalDate date = filterStart.getValue();
@@ -73,6 +74,8 @@ public class Rpt_AppointmentTypesPerMonth {
         rptType.setPrefWidth(100);
 
         reportTable.getColumns().addAll(rptCount, rptMonth, rptType);
+
+        updateReport();
     }
 
     private void updateReport() {
