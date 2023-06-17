@@ -88,7 +88,7 @@ public class LoginPrompt {
 
             try {
                 Files.writeString(login_activity, "User '" + userName + "' tried to log in at " +
-                                ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")),
+                                ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")) + "\n",
                         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
                 System.out.println("There was an error saving login_activity.txt\n" + e);
@@ -98,7 +98,7 @@ public class LoginPrompt {
             state.setLogInUser(userName, userId);
             try {
                 Files.writeString(login_activity, "User '" + userName + "' successfully logged in at " +
-                        ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")),
+                        ZonedDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy")) + "\n",
                         StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             } catch (IOException e) {
                 System.out.println("There was an error saving login_activity.txt\n" + e);
