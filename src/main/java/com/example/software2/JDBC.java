@@ -109,7 +109,7 @@ public class JDBC {
                 //Timestamp createTime = rs.getTimestamp("Create_Date");
                 //String createBy = rs.getString("Create_By");
                 //Timestamp last_update = rs.getTimestamp("Last_Update");
-                //String last_update_by = rs.getString("Last_Update_By");
+                //String last_update_by = rs.getString("Last_Updated_By");
                 Integer customerId = rs.getInt("Customer_ID");
                 Integer userID = rs.getInt("User_ID");
                 Integer contactId = rs.getInt("Contact_ID");
@@ -133,8 +133,8 @@ public class JDBC {
         try {
             makeConnection();
             makePreparedStatement("INSERT INTO client_schedule.appointments (Title, Description, Location, Type, Start, End, " +
-                    "Create_Date, Created_By, Last_Update, Last_Update_By, Customer_ID, User_ID, Contact_ID) VALUES (" +
-                    "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)", getConnection());
+                    "Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (" +
+                    "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", getConnection());
 
             preparedStatement.setString(1, appointment.getTitle());
             preparedStatement.setString(2, appointment.getDescription());
@@ -164,7 +164,7 @@ public class JDBC {
             makeConnection();
             makePreparedStatement("UPDATE client_schedule.appointments SET Title=?, Description=?, Location=?," +
                     " Type=?, Start=?, End=?, " +
-                    "Last_Update=?, Last_Update_By=?, Customer_ID=?, Contact_ID=? WHERE Appointment_ID=?", getConnection());
+                    "Last_Update=?, Last_Updated_By=?, Customer_ID=?, Contact_ID=? WHERE Appointment_ID=?", getConnection());
 
             preparedStatement.setInt(11, appointment.getId());
 
