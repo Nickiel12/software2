@@ -245,6 +245,12 @@ public class AddAppointment {
         databaseConn = newConn;
     }
 
+    private Integer userId;
+
+    public void setUserId(Integer newId) {
+        userId = newId;
+    }
+
     /**
      * Handle the Submit button on the addAppointment form.
      * Does last minute input validation and prepared the value for getAppointment
@@ -355,6 +361,8 @@ public class AddAppointment {
             appointment.setStartTime(startDateTime);
             appointment.setEndTime(endDateTime);
         }
+
+        appointment.setUserId(userId);
 
         appointment.setLocalTime(currentZone);
 

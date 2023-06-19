@@ -24,8 +24,7 @@
       <TextField fx:id="locationTextField" layoutX="121.0" layoutY="86.0" promptText="Location" />
       <TextField fx:id="typeTextField" layoutX="121.0" layoutY="116.0" promptText="Type" />
       <TextArea fx:id="descTextArea" layoutX="121.0" layoutY="270.0" prefHeight="68.0" prefWidth="149.0" promptText="Appointment Description" />
-      <DatePicker fx:id="endTimeDatePicker" layoutX="183.0" layoutY="236.0" prefHeight="25.0" prefWidth="105.0" promptText="End Date" />
-      <DatePicker fx:id="startTimeDatePicker" layoutX="183.0" layoutY="206.0" prefHeight="25.0" prefWidth="105.0" promptText="Start Date" />
+      <DatePicker fx:id="startTimeDatePicker" layoutX="181.0" layoutY="224.0" prefHeight="25.0" prefWidth="105.0" promptText="Date" />
       <ComboBox fx:id="contactComboBox" layoutX="121.0" layoutY="176.0" onAction="#validateContactCombBox" prefWidth="150.0" />
       <ComboBox fx:id="custComboBox" layoutX="121.0" layoutY="146.0" onAction="#validateCustCombBox" prefWidth="150.0" />
       <TextField fx:id="startTimeTimeTextField" layoutX="104.0" layoutY="206.0" onKeyPressed="#onStartTimeFocusChange" prefHeight="25.0" prefWidth="77.0" promptText="Start Time" />

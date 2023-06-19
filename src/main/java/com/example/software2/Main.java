@@ -329,6 +329,7 @@ public class Main {
 
         AppointmentInstance appointment = C_Table.getSelectionModel().getSelectedItem();
         AddAppointment controller = fxmlLoader.getController();
+        controller.setUserId(state.getUserId());
         controller.setCustomers(state.getCustomers());
         controller.setContacts(state.getContacts());
         controller.setZone(state.getCurrentZone());
@@ -360,6 +361,7 @@ public class Main {
         stage.setScene(new Scene(root));
 
         AddAppointment controller = fxmlLoader.getController();
+        controller.setUserId(state.getUserId());
         controller.setCustomers(state.getCustomers());
         controller.setContacts(state.getContacts());
         controller.setZone(state.getCurrentZone());
@@ -458,7 +460,7 @@ public class Main {
      * @throws IOException throws an IOException if the AddCustomer.fxml file is not in the correct location
      */
     public void onCustomerEditPress() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AddAppointment.class.getResource("AddCustomer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AddCustomer.class.getResource("AddCustomer.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Edit Customer Info");
@@ -486,7 +488,7 @@ public class Main {
      * @throws IOException throws an IOException if the AddCustomer.fxml file is not in the correct location
      */
     public void onCustomerCreatePress() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AddAppointment.class.getResource("AddCustomer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AddCustomer.class.getResource("AddCustomer.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Create Customer Info");

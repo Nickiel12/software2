@@ -161,8 +161,8 @@ public class JDBC {
             preparedStatement.setTimestamp(9, Timestamp.from(ZonedDateTime.now(ZoneOffset.UTC).toInstant()));
             preparedStatement.setString(10, userName);
             preparedStatement.setInt(11, appointment.getCustomerId());
-            preparedStatement.setInt(12, appointment.getContactId());
-            preparedStatement.setInt(13, appointment.getUserId());
+            preparedStatement.setInt(12, appointment.getUserId());
+            preparedStatement.setInt(13, appointment.getContactId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -393,7 +393,7 @@ public class JDBC {
                 }
             }
 
-            makePreparedStatement("DELETE FROM client_schedule.customers WHERE Customer_ID=?" + customer.getId(), getConnection());
+            makePreparedStatement("DELETE FROM client_schedule.customers WHERE Customer_ID=" + customer.getId(), getConnection());
 
             int _rowsAffected = preparedStatement.executeUpdate();
         } catch (SQLException e) {
