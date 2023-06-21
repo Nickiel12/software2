@@ -330,10 +330,12 @@ public class AddAppointment {
 
         if (startDateTime != null && endDateTime != null) {
 
-            if (databaseConn.appointmentConflictDuring(startDateTime, endDateTime, appointment.getCustomerId())) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "This customer already has an appointment at that time!", ButtonType.OK);
-                alert.showAndWait();
-                return;
+            if (appointment.getId() == -1) {
+                if (databaseConn.appointmentConflictDuring(startDateTime, endDateTime, appointment.getCustomerId())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "This customer already has an appointment at that time!", ButtonType.OK);
+                    alert.showAndWait();
+                    return;
+                }
             }
 
             ZonedDateTime businessHoursStart = startTimeDatePicker.getValue().atStartOfDay(ZoneId.of("America/New_York")).withHour(8).withMinute(0).withSecond(0);

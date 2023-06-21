@@ -105,6 +105,7 @@ public class Main {
         initializeCustomersView();
 
         state.updateAppointments();
+        checkUpcoming();
     }
 
     /**
@@ -631,8 +632,6 @@ public class Main {
 
         if (!state.appIsLoggedIn()) {
             closeStageOnSet = true;
-        } else {
-            checkUpcoming();
         }
     }
 }
